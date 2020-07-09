@@ -1,0 +1,28 @@
+{
+  "name": "azdanov/questions",
+  "type": "project",
+  "description": "Exercises to prepare for an interview",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Anton Zdanov",
+      "email": "azdanov@pm.me"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "codedungeon/phpunit-result-printer": "0.28.0",
+    "phpunit/phpunit": "9.2.5",
+    "spatie/phpunit-watcher": "1.22.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Exercises\\": "exercises/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "azdanov",
+      "name": "Anton Ždanov",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6123841?v=4",
+      "profile": "https://azdanov.js.org/",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
+      "login": "Ahmed-Aboud",
+      "name": "ahmed",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25877831?v=4",
+      "profile": "https://github.com/Ahmed-Aboud",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "tizis",
+      "name": "Roman Yepanchenko",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/16865573?v=4",
+      "profile": "https://github.com/tizis",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "fathom",
+      "name": "Fathom",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13853845?v=4",
+      "profile": "https://github.com/fathom",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "Olden",
+      "name": "Alexander Katynia",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/546682?v=4",
+      "profile": "https://github.com/Olden",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "kevin-schmitt",
+      "name": "kevin-schmitt",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10809414?v=4",
+      "profile": "https://github.com/kevin-schmitt",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "php-interview-exercises",
+  "projectOwner": "azdanov",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "commitConvention": "none"
+}
