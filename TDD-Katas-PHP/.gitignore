@@ -1,0 +1,10 @@
+# Composer files
+composer.phar
+vendor/
+
+# phpunit
+phpunit.xml
+.phpunit.result.cache
+
+# phpstorm
+.idea/

@@ -1,0 +1,67 @@
+{
+  "name": "tdd-katas",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Daniel Zlotin <zlotindaniel@gmail.com>",
+  "publishConfig": {
+    "registry": "none"
+  },
+  "bugs": {
+    "url": "https://github.com/wix/tdd-katas/issues"
+  },
+  "homepage": "https://github.com/wix/tdd-katas",
+  "readme": "https://github.com/wix/tdd-katas#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wix/tdd-katas.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "build": ":",
+    "test": "xo 'src/**/*.js' && jest --coverage",
+    "watch": "jest --watch",
+    "release": ":"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "jest": "^25.3.0",
+    "xo": "^0.29.1"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/"
+    ],
+    "resetMocks": true,
+    "resetModules": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "xo": {
+    "space": true,
+    "env": [
+      "node",
+      "jest"
+    ],
+    "rules": {
+      "unicorn/filename-case": 0,
+      "arrow-parens": [
+        2,
+        "always"
+      ],
+      "object-curly-spacing": [
+        2,
+        "always"
+      ]
+    }
+  }
+}
