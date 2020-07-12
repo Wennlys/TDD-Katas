@@ -4,11 +4,13 @@ namespace FizzBuzz;
 
 use InvalidArgumentException;
 use Exception;
+use FizzBuzz\ReplaceIfIsDivisor;
+use FizzBuzz\ReplaceIfContains;
 
 class FizzBuzz
 {
     private int $arrayLimit;
- 
+
     public function __construct(int $arrayLimit)
     {
         if ($arrayLimit < 0) {
@@ -18,47 +20,40 @@ class FizzBuzz
         $this->arrayLimit = $arrayLimit;
     }
 
-    public function getFizzBuzz(): array
+    public function get(): array
     {
-        $notReplacedNums = $this->createArrayWithDefinedValue();
-        $fizzBuzzArray = $this->fizzBuzzReplacer($notReplacedNums);
-        $this->validateFizzBuzz($fizzBuzzArray);
+        $numbersList = $this->createArrayWithDefinedValue();
+        $replacedArray = $this->replace($numbersList, new ReplaceIfIsDivisor());
 
-        return $fizzBuzzArray;
+        $this->validate($replacedArray);
+
+        return $replacedArray;
     }
 
-    private function validateFizzBuzz(array $fizzBuzzArray)
+    private function replace(array $numbers, Replacer $requirement): array
+    {
+        foreach ($numbers as $number => $key) {
+            $replacedArray[$key] = $requirement->replace($number) ?? $number;
+        }
+        return $replacedArray ?? [];
+    }
+
+    /** @throws Exception */
+    private function validate(array $replacedArray): void
     {
         if (
-            in_array('fizz', $fizzBuzzArray, true) == false &&
-            in_array('buzz', $fizzBuzzArray, true) == false
+            in_array('fizz', $replacedArray, true) == false &&
+            in_array('buzz', $replacedArray, true) == false
         ) {
             throw new Exception('Not Found');
         }
     }
 
-    private function fizzBuzzReplacer(array $notReplacedNums): array
-    {
-        $replacedNums = [];
-
-        for ($i = 0; $i < count($notReplacedNums); $i++) {
-            if ($notReplacedNums[$i] % 3 == 0) {
-                $replacedNums[$i] = "fizz";
-            } elseif ($notReplacedNums[$i] % 5 == 0) {
-                $replacedNums[$i] = "buzz";
-            } else {
-                $replacedNums[$i] = $i;
-            }
-        }
-        return $replacedNums;
-    }
-
     private function createArrayWithDefinedValue(): array
     {
-        for ($i = 0, $numbersList = []; $i < $this->arrayLimit; $i++) {
+        for ($i = 1, $numbersList = []; $i <= $this->arrayLimit; $i++) {
             $numbersList[$i] = $i + 1;
         }
-
         return $numbersList;
     }
 }
