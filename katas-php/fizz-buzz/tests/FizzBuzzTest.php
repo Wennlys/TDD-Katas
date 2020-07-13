@@ -18,6 +18,7 @@ class FizzBuzzTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         new FizzBuzz(-1);
+        new FizzBuzz(0);
     }
 
     /** @test */
@@ -59,32 +60,41 @@ class FizzBuzzTest extends TestCase
         $fizzBuzz = new FizzBuzz($arrayLimit);
         $result = $fizzBuzz->get();
 
-        $this->assertContains("fizz", $result);
+        $this->assertContains("Fizz", $result);
 
         if ($arrayLimit >= 5) {
-            $this->assertContains("buzz", $result);
+            $this->assertContains("Buzz", $result);
         }
     }
 
     public function testReplacingByDivisors()
     {
         $replaceIfIsDivisor = new ReplaceIfIsDivisor();
-        $this->assertEquals("fizz", $replaceIfIsDivisor->replace(3));
-        $this->assertEquals("buzz", $replaceIfIsDivisor->replace(5));
+        $this->assertEquals("Fizz", $replaceIfIsDivisor->replace(3));
+        $this->assertEquals("Buzz", $replaceIfIsDivisor->replace(5));
         $this->assertEquals("FizzBuzz", $replaceIfIsDivisor->replace(15));
-        $this->assertEquals("fizz", $replaceIfIsDivisor->replace(27));
+        $this->assertEquals("Fizz", $replaceIfIsDivisor->replace(27));
         $this->assertEquals(null, $replaceIfIsDivisor->replace(2));
     }
 
     public function testReplacingIfContains()
     {
         $replaceIfContains = new ReplaceIfContains();
-        $this->assertEquals("fizz", $replaceIfContains->replace(3));
-        $this->assertEquals("buzz", $replaceIfContains->replace(5));
-        $this->assertEquals("buzz", $replaceIfContains->replace(15));
-        $this->assertEquals("fizz", $replaceIfContains->replace(13));
-        $this->assertEquals("buzz", $replaceIfContains->replace(6785));
-        $this->assertEquals("fizz", $replaceIfContains->replace(864367));
+        $this->assertEquals("Fizz", $replaceIfContains->replace(3));
+        $this->assertEquals("Buzz", $replaceIfContains->replace(5));
+        $this->assertEquals("Buzz", $replaceIfContains->replace(15));
+        $this->assertEquals("Fizz", $replaceIfContains->replace(13));
+        $this->assertEquals("Buzz", $replaceIfContains->replace(6785));
+        $this->assertEquals("Fizz", $replaceIfContains->replace(864367));
         $this->assertEquals("FizzBuzz", $replaceIfContains->replace(35));
+        $this->assertEquals(null, $replaceIfContains->replace(7));
+    }
+
+    public function testAllReplacements()
+    {
+        $this->assertEquals(
+            [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", "Fizz", 14, "FizzBuzz", 16, 17, "Fizz", 19, "Buzz", "Fizz", 22, "Fizz", "Fizz", "Buzz"],
+            (new FizzBuzz(25))->get()
+        );
     }
 }

@@ -8,15 +8,15 @@ class ReplaceIfContains implements Replacer
     {
         $numberString = (string)$number;
 
-        $hasThree = strpos($numberString, '3') !== false;
-        $hasFive = strpos($numberString, '5') !== false;
+        $hasThree = strpos($numberString, "3") !== false;
+        $hasFive = strpos($numberString, "5") !== false;
 
         if ($hasThree && $hasFive) {
             return "FizzBuzz";
         } elseif ($hasThree) {
-            return "fizz";
+            return "Fizz";
         } elseif ($hasFive) {
-            return "buzz";
+            return "Buzz";
         }
 
         return null;
