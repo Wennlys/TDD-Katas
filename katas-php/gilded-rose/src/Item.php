@@ -1,6 +1,5 @@
 <?php
 
-
 namespace GildedRose;
 
 class Item
@@ -9,7 +8,7 @@ class Item
     public $sell_in;
     public $quality;
 
-    function __construct($name, $sell_in, $quality)
+    public function __construct($name, $sell_in, $quality)
     {
         $this->name = $name;
         $this->sell_in = $sell_in;
