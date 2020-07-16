@@ -22,7 +22,39 @@ namespace Mockery\Matcher;
 
 class Subset extends MatcherAbstract
 {
-    
+    private $expected;
+    private $strict = true;
+
+    /**
+     * @param array $expected Expected subset of data
+     * @param bool $strict Whether to run a strict or loose comparison
+     */
+    public function __construct(array $expected, $strict = true)
+    {
+        $this->expected = $expected;
+        $this->strict = $strict;
+    }
+
+    /**
+     * @param array $expected Expected subset of data
+     *
+     * @return Subset
+     */
+    public static function strict(array $expected)
+    {
+        return new static($expected, true);
+    }
+
+    /**
+     * @param array $expected Expected subset of data
+     *
+     * @return Subset
+     */
+    public static function loose(array $expected)
+    {
+        return new static($expected, false);
+    }
+
     /**
      * Check if the actual value matches the expected.
      *
@@ -31,17 +63,17 @@ class Subset extends MatcherAbstract
      */
     public function match(&$actual)
     {
-        foreach ($this->_expected as $k=>$v) {
-            if (!array_key_exists($k, $actual)) {
-                return false;
-            }
-            if ($actual[$k] !== $v) {
-                return false;
-            }
+        if (!is_array($actual)) {
+            return false;
         }
-        return true;
+
+        if ($this->strict) {
+            return $actual === array_replace_recursive($actual, $this->expected);
+        }
+
+        return $actual == array_replace_recursive($actual, $this->expected);
     }
-    
+
     /**
      * Return a string representation of this Matcher
      *
@@ -51,11 +83,10 @@ class Subset extends MatcherAbstract
     {
         $return = '<Subset[';
         $elements = array();
-        foreach ($this->_expected as $k=>$v) {
+        foreach ($this->expected as $k=>$v) {
             $elements[] = $k . '=' . (string) $v;
         }
         $return .= implode(', ', $elements) . ']>';
         return $return;
     }
-    
 }

@@ -17,13 +17,13 @@
  * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery\Exception;
+
 use Mockery;
 
 class InvalidOrderException extends Mockery\Exception
 {
-
     protected $method = null;
 
     protected $expected = 0;
@@ -32,7 +32,7 @@ class InvalidOrderException extends Mockery\Exception
 
     protected $mockObject = null;
 
-    public function setMock(Mockery\MockInterface $mock)
+    public function setMock(Mockery\LegacyMockInterface $mock)
     {
         $this->mockObject = $mock;
         return $this;
@@ -80,5 +80,4 @@ class InvalidOrderException extends Mockery\Exception
     {
         return $this->getMock()->mockery_getName();
     }
-
 }

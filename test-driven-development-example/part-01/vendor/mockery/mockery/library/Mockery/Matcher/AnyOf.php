@@ -22,17 +22,6 @@ namespace Mockery\Matcher;
 
 class AnyOf extends MatcherAbstract
 {
-    
-    /**
-     * Set the expected value
-     *
-     * @param mixed $expected
-     */
-    public function __construct($expected = null)
-    {
-        $this->_expected = $expected;
-    }
-    
     /**
      * Check if the actual value does not match the expected (in this
      * case it's specifically NOT expected).
@@ -42,14 +31,9 @@ class AnyOf extends MatcherAbstract
      */
     public function match(&$actual)
     {
-        foreach ($this->_expected as $exp) {
-            if ($actual === $exp || $actual == $exp) {
-                return true;
-            }
-        }
-        return false;
+        return in_array($actual, $this->_expected, true);
     }
-    
+
     /**
      * Return a string representation of this Matcher
      *
@@ -59,5 +43,4 @@ class AnyOf extends MatcherAbstract
     {
         return '<AnyOf>';
     }
-    
 }

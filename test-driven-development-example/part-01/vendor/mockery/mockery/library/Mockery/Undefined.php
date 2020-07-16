@@ -17,12 +17,11 @@
  * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery;
 
 class Undefined
 {
-
     /**
      * Call capturing to merely return this same object.
      *
@@ -33,10 +32,10 @@ class Undefined
     public function __call($method, array $args)
     {
         return $this;
-    }  
+    }
 
     /**
-     * Return a string, avoiding E_RECOVERABLE_ERROR 
+     * Return a string, avoiding E_RECOVERABLE_ERROR
      *
      * @return string
      */
@@ -44,5 +43,4 @@ class Undefined
     {
         return __CLASS__ . ":" . spl_object_hash($this);
     }
-
 }

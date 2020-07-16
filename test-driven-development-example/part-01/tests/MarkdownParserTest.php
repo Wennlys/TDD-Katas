@@ -1,8 +1,11 @@
 <?php
 
-use Example\MarkdownParser;
+namespace Example;
 
-class MarkdownParserTest extends PHPUnit_Framework_TestCase
+use Example\MarkdownParser;
+use PHPUnit\Framework\TestCase;
+
+class MarkdownParserTest extends TestCase
 {
     /**
      * Hello there! Today we are going to be doing
@@ -33,6 +36,6 @@ class MarkdownParserTest extends PHPUnit_Framework_TestCase
      */
     public function testMarkdownParserCanBeCreated()
     {
-        $m = new MarkdownParser;
+        $m = new MarkdownParser();
     }
 }

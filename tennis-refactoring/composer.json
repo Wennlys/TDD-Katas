@@ -1,0 +1,26 @@
+{
+    "name": "codium/tennis-refactoring-kata",
+    "description": "Tennis refactoring Kata",
+    "require": {
+        "php": "^7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "authors": [
+        {
+            "name": "Luis Rovirosa",
+            "email": "luis@codium.team"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codium\\TennisRefactoring\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Codium\\TennisRefactoring\\": "tests"
+        }
+    }
+}

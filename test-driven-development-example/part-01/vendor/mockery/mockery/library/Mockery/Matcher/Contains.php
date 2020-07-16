@@ -22,7 +22,6 @@ namespace Mockery\Matcher;
 
 class Contains extends MatcherAbstract
 {
-    
     /**
      * Check if the actual value matches the expected.
      *
@@ -38,7 +37,7 @@ class Contains extends MatcherAbstract
                 if ($exp === $val || $exp == $val) {
                     $match = true;
                     break;
-                }   
+                }
             }
             if ($match === false) {
                 return false;
@@ -46,7 +45,7 @@ class Contains extends MatcherAbstract
         }
         return true;
     }
-    
+
     /**
      * Return a string representation of this Matcher
      *
@@ -62,5 +61,4 @@ class Contains extends MatcherAbstract
         $return .= implode(', ', $elements) . ']>';
         return $return;
     }
-    
 }

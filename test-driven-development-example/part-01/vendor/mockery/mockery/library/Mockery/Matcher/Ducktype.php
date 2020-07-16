@@ -22,7 +22,6 @@ namespace Mockery\Matcher;
 
 class Ducktype extends MatcherAbstract
 {
-    
     /**
      * Check if the actual value matches the expected.
      *
@@ -41,7 +40,7 @@ class Ducktype extends MatcherAbstract
         }
         return true;
     }
-    
+
     /**
      * Return a string representation of this Matcher
      *
@@ -51,5 +50,4 @@ class Ducktype extends MatcherAbstract
     {
         return '<Ducktype[' . implode(', ', $this->_expected) . ']>';
     }
-    
 }

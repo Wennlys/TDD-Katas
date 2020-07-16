@@ -20,9 +20,11 @@
 
 namespace Mockery\Matcher;
 
+/**
+ * @deprecated 2.0 Due to ambiguity, use Hamcrest or PHPUnit equivalents
+ */
 class MustBe extends MatcherAbstract
 {
-    
     /**
      * Check if the actual value matches the expected.
      *
@@ -33,11 +35,11 @@ class MustBe extends MatcherAbstract
     {
         if (!is_object($actual)) {
             return $this->_expected === $actual;
-        } else {
-            return $this->_expected == $actual;
         }
+
+        return $this->_expected == $actual;
     }
-    
+
     /**
      * Return a string representation of this Matcher
      *
@@ -47,5 +49,4 @@ class MustBe extends MatcherAbstract
     {
         return '<MustBe>';
     }
-    
 }

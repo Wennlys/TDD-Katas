@@ -17,13 +17,14 @@
  * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery\Exception;
+
 use Mockery;
+use Mockery\Exception\RuntimeException;
 
 class InvalidCountException extends Mockery\CountValidator\Exception
 {
-
     protected $method = null;
 
     protected $expected = 0;
@@ -34,7 +35,7 @@ class InvalidCountException extends Mockery\CountValidator\Exception
 
     protected $mockObject = null;
 
-    public function setMock(Mockery\MockInterface $mock)
+    public function setMock(Mockery\LegacyMockInterface $mock)
     {
         $this->mockObject = $mock;
         return $this;
@@ -61,7 +62,7 @@ class InvalidCountException extends Mockery\CountValidator\Exception
     public function setExpectedCountComparative($comp)
     {
         if (!in_array($comp, array('=', '>', '<', '>=', '<='))) {
-            throw new Exception(
+            throw new RuntimeException(
                 'Illegal comparative for expected call counts set: ' . $comp
             );
         }
@@ -98,5 +99,4 @@ class InvalidCountException extends Mockery\CountValidator\Exception
     {
         return $this->expectedComparative;
     }
-
 }

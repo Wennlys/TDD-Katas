@@ -17,69 +17,68 @@
  * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery;
 
 class ExpectationDirector
 {
-
     /**
      * Method name the director is directing
      *
      * @var string
      */
     protected $_name = null;
-    
+
     /**
      * Mock object the director is attached to
      *
-     * @var \Mockery\MockInterface
+     * @var \Mockery\MockInterface|\Mockery\LegacyMockInterface
      */
     protected $_mock = null;
-    
+
     /**
      * Stores an array of all expectations for this mock
      *
      * @var array
      */
     protected $_expectations = array();
-    
+
     /**
      * The expected order of next call
      *
      * @var int
      */
     protected $_expectedOrder = null;
-    
+
     /**
      * Stores an array of all default expectations for this mock
      *
      * @var array
      */
     protected $_defaults = array();
-    
+
     /**
      * Constructor
      *
      * @param string $name
-     * @param \Mockery\MockInterface $mock
+     * @param \Mockery\LegacyMockInterface $mock
      */
-    public function __construct($name, \Mockery\MockInterface $mock)
+    public function __construct($name, \Mockery\LegacyMockInterface $mock)
     {
         $this->_name = $name;
         $this->_mock = $mock;
     }
-    
+
     /**
      * Add a new expectation to the director
      *
-     * @param Mutateme\Expectation $expectation
+     * @param \Mockery\Expectation $expectation
      */
     public function addExpectation(\Mockery\Expectation $expectation)
     {
         $this->_expectations[] = $expectation;
     }
-    
+
     /**
      * Handle a method call being directed by this instance
      *
@@ -106,7 +105,7 @@ class ExpectationDirector
         }
         return $expectation->verifyCall($args);
     }
-    
+
     /**
      * Verify all expectations of the director
      *
@@ -125,27 +124,33 @@ class ExpectationDirector
             }
         }
     }
-    
+
     /**
-     * Attempt to locate an expecatation matching the provided args
+     * Attempt to locate an expectation matching the provided args
      *
      * @param array $args
      * @return mixed
      */
     public function findExpectation(array $args)
     {
+        $expectation = null;
+
         if (!empty($this->_expectations)) {
-            return $this->_findExpectationIn($this->_expectations, $args);
-        } else {
-            return $this->_findExpectationIn($this->_defaults, $args);
+            $expectation = $this->_findExpectationIn($this->_expectations, $args);
         }
+
+        if ($expectation === null && !empty($this->_defaults)) {
+            $expectation = $this->_findExpectationIn($this->_defaults, $args);
+        }
+
+        return $expectation;
     }
-    
+
     /**
      * Make the given expectation a default for all others assuming it was
      * correctly created last
      *
-     * @param \Mockery\Expectation
+     * @param \Mockery\Expectation $expectation
      */
     public function makeExpectationDefault(\Mockery\Expectation $expectation)
     {
@@ -159,7 +164,7 @@ class ExpectationDirector
             );
         }
     }
-    
+
     /**
      * Search current array of expectations for a match
      *
@@ -170,7 +175,7 @@ class ExpectationDirector
     protected function _findExpectationIn(array $expectations, array $args)
     {
         foreach ($expectations as $exp) {
-            if ($exp->matchArgs($args) && $exp->isEligible()) {
+            if ($exp->isEligible() && $exp->matchArgs($args)) {
                 return $exp;
             }
         }
@@ -180,7 +185,7 @@ class ExpectationDirector
             }
         }
     }
-    
+
     /**
      * Return all expectations assigned to this director
      *
@@ -190,7 +195,17 @@ class ExpectationDirector
     {
         return $this->_expectations;
     }
-    
+
+    /**
+     * Return all expectations assigned to this director
+     *
+     * @return array
+     */
+    public function getDefaultExpectations()
+    {
+        return $this->_defaults;
+    }
+
     /**
      * Return the number of expectations assigned to this director.
      *
@@ -198,7 +213,6 @@ class ExpectationDirector
      */
     public function getExpectationCount()
     {
-        return count($this->getExpectations());    
+        return count($this->getExpectations()) ?: count($this->getDefaultExpectations());
     }
-
 }

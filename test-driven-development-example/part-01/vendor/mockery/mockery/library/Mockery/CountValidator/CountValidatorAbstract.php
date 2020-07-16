@@ -17,19 +17,18 @@
  * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery\CountValidator;
 
 abstract class CountValidatorAbstract
 {
-
     /**
      * Expectation for which this validator is assigned
      *
      * @var \Mockery\Expectation
      */
     protected $_expectation = null;
-    
+
     /**
      * Call count limit
      *
@@ -48,7 +47,7 @@ abstract class CountValidatorAbstract
         $this->_expectation = $expectation;
         $this->_limit = $limit;
     }
-    
+
     /**
      * Checks if the validator can accept an additional nth call
      *
@@ -59,13 +58,12 @@ abstract class CountValidatorAbstract
     {
         return ($n < $this->_limit);
     }
-    
+
     /**
      * Validate the call count against this validator
      *
      * @param int $n
      * @return bool
      */
-    public abstract function validate($n);
-
+    abstract public function validate($n);
 }

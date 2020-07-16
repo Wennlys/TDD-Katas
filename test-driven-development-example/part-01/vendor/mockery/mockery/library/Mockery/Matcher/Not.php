@@ -22,7 +22,6 @@ namespace Mockery\Matcher;
 
 class Not extends MatcherAbstract
 {
-    
     /**
      * Check if the actual value does not match the expected (in this
      * case it's specifically NOT expected).
@@ -34,7 +33,7 @@ class Not extends MatcherAbstract
     {
         return $actual !== $this->_expected;
     }
-    
+
     /**
      * Return a string representation of this Matcher
      *
@@ -44,5 +43,4 @@ class Not extends MatcherAbstract
     {
         return '<Not>';
     }
-    
 }

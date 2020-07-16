@@ -17,13 +17,13 @@
  * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
  * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery\CountValidator;
+
 use Mockery;
 
 class AtMost extends CountValidatorAbstract
 {
-
     /**
      * Validate the call count against this validator
      *
@@ -48,5 +48,4 @@ class AtMost extends CountValidatorAbstract
             throw $exception;
         }
     }
-
 }

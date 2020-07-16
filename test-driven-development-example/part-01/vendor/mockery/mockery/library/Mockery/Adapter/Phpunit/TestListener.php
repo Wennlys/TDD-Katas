@@ -12,68 +12,37 @@
  * obtain it through the world-wide-web, please send an email
  * to padraic@php.net so we can send you a copy immediately.
  *
- * @category   Mockery
- * @package    Mockery
- * @copyright  Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
- * @license    http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
+ * @category  Mockery
+ * @package   Mockery
+ * @copyright Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)
+ * @license   http://github.com/padraic/mockery/blob/master/LICENSE New BSD License
  */
- 
+
 namespace Mockery\Adapter\Phpunit;
 
-class TestListener implements \PHPUnit_Framework_TestListener
+use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestListenerDefaultImplementation;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit\Framework\TestListener as PHPUnitTestListener;
+
+class TestListener implements PHPUnitTestListener
 {
-    
-    /**
-     * After each test, perform Mockery verification tasks and cleanup the
-     * statically stored Mockery container for the next test.
-     *
-     * @param  PHPUnit_Framework_Test $test
-     * @param  float                  $time
-     */
-    public function endTest(\PHPUnit_Framework_Test $test, $time)
+    use TestListenerDefaultImplementation;
+
+    private $trait;
+
+    public function __construct()
     {
-        try
-        {
-            $container = \Mockery::getContainer();
-            if ($container != null) {
-                $expectation_count = $container->mockery_getExpectationCount();
-                $test->addToAssertionCount($expectation_count);
-            }
-            \Mockery::close();
-        } catch (\Exception $e) {
-            $result = $test->getTestResultObject();
-            $result->addError($test, $e, $time);
-        }
+        $this->trait = new TestListenerTrait();
     }
-    
-	/**
-	 * Add Mockery files to PHPUnit's blacklist so they don't showup on coverage reports 
-	 */
-    public function startTestSuite(\PHPUnit_Framework_TestSuite $suite) {
-		
-        if (class_exists('\\PHP_CodeCoverage_Filter')
-        && method_exists('\\PHP_CodeCoverage_Filter', 'getInstance')) {
-            \PHP_CodeCoverage_Filter::getInstance()->addDirectoryToBlacklist(
-                 __DIR__.'/../../../Mockery/', '.php', '', 'PHPUNIT'
-            );
 
-            \PHP_CodeCoverage_Filter::getInstance()->addFileToBlacklist(__DIR__.'/../../../Mockery.php', 'PHPUNIT');
-        }
+    public function endTest(Test $test, float $time): void
+    {
+        $this->trait->endTest($test, $time);
     }
-    /**
-     *  The Listening methods below are not required for Mockery
-     */
-    public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time) {}
 
-    public function addFailure(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_AssertionFailedError $e, $time) {}
-
-    public function addIncompleteTest(\PHPUnit_Framework_Test $test, \Exception $e, $time) {}
-
-    public function addSkippedTest(\PHPUnit_Framework_Test $test, \Exception $e, $time) {}
-
-
-    public function endTestSuite(\PHPUnit_Framework_TestSuite $suite) {}
-
-    public function startTest(\PHPUnit_Framework_Test $test) {}
-
+    public function startTestSuite(TestSuite $suite): void
+    {
+        $this->trait->startTestSuite();
+    }
 }
