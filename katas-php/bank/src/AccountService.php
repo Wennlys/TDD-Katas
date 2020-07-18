@@ -6,7 +6,8 @@ class AccountService
 {
     /**
      * Add an amount to the account.
-     * Do not return any value
+     * Do not return any value.
+     *
      * @param int $amount
      */
     public function deposit($amount)
@@ -15,7 +16,8 @@ class AccountService
 
     /**
      * Remove an amount from the account.
-     * Do not return any value
+     * Do not return any value.
+     *
      * @param int $amount
      */
     public function withdraw($amount)
@@ -24,7 +26,7 @@ class AccountService
 
     /**
      * Print the statements containing all the transactions in the console
-     * Do not return any value
+     * Do not return any value.
      */
     public function printStatements()
     {
