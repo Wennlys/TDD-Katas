@@ -15,8 +15,18 @@ class Item
         $this->quality = $quality;
     }
 
-    public function __toString()
+    public function updateQuality(): void
     {
-        return $this->name . "," . $this->sell_in . ',' . $this->quality;
+        if ($this->sell_in < 0) {
+            $this->quality -= 2;
+        } else {
+            --$this->quality;
+        }
+
+        if ($this->quality < 0) {
+            $this->quality = 0;
+        }
+
+        --$this->sell_in;
     }
 }

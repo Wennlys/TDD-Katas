@@ -6,81 +6,33 @@ namespace GildedRose;
 
 class GildedRose
 {
-    private $items;
+    private array $items;
 
-    public function __construct($items)
+    public function __construct(array $items)
     {
         $this->items = $items;
     }
 
-    public function udpateQuality()
+    public function updateQuality()
     {
         foreach ($this->items as $item) {
-            switch ($item->name) {
-                case "Aged Brie":
-                    $item->sell_in -= 1;
-                    $this->agedBrie($item);
-                    return;
-                case "Backstage passes to a TAFKAL80ETC concert":
-                    $this->backstage($item);
-                    $item->sell_in -= 1;
-                    return;
-                case "Conjured":
-                    $this->conjured($item);
-                    $item->sell_in -= 1;
-                    return;
-                case "Sulfuras, Hand of Ragnaros":
-                    return;
-                default:
-                    $item->sell_in -= 1;
-                    $this->default($item);
-            }
-
-            if ($item->quality < 0) {
-                $item->quality = 0;
-            }
+            $item->updateQuality();
         }
     }
 
-    private function agedBrie($item)
+    public static function createItem(string $name, int $sell_in, int $quality): Item
     {
-        if ($item->quality < 50) {
-            $item->quality += 1;
+        switch ($name) {
+            case 'Aged Brie':
+                return new AgedBrie($sell_in, $quality);
+            case 'Backstage passes to a TAFKAL80ETC concert':
+                return new BackstagePass($sell_in, $quality);
+            case 'Sulfuras, Hand of Ragnaros':
+                return new Sulfuras($sell_in, $quality);
+            case 'Conjured':
+                return new Conjured($sell_in, $quality);
+            default:
+                return new Item($name, $sell_in, $quality);
         }
-    }
-
-    private function default($item)
-    {
-        if ($item->sell_in < 0) {
-            $item->quality -= 2;
-        } else {
-            $item->quality -= 1;
-        }
-    }
-
-    private function backstage($item)
-    {
-        $item->quality += 1;
-
-        if ($item->sell_in < 11) {
-            $item->quality += 1;
-        }
-
-        if ($item->sell_in < 6) {
-            $item->quality += 1;
-        }
-
-        if ($item->sell_in < 0) {
-            $item->quality = 0;
-        }
-
-        if ($item->quality > 50) {
-            $item->quality = 50;
-        }
-    }
-
-    private function conjured($item)
-    {
-            $item->quality -= 2;
     }
 }
