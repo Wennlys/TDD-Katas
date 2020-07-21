@@ -2,10 +2,8 @@
 
 namespace FizzBuzz;
 
-use InvalidArgumentException;
 use Exception;
-use FizzBuzz\ReplaceIfIsDivisor;
-use FizzBuzz\ReplaceIfContains;
+use InvalidArgumentException;
 
 class FizzBuzz
 {
@@ -14,7 +12,7 @@ class FizzBuzz
     public function __construct(int $arrayLimit)
     {
         if ($arrayLimit <= 0) {
-            throw new InvalidArgumentException("arrayLimit must not be negative");
+            throw new InvalidArgumentException('arrayLimit must not be negative');
         }
 
         $this->arrayLimit = $arrayLimit;
@@ -34,12 +32,13 @@ class FizzBuzz
     private function replace(array $numbers, Replacer $requirement): array
     {
         foreach ($numbers as $number) {
-            if (gettype($number) == 'string') {
+            if ('string' === \gettype($number)) {
                 $replacedArray[] = $number;
             } else {
                 $replacedArray[] = $requirement->replace($number) ?? $number;
             }
         }
+
         return $replacedArray ?? [];
     }
 
@@ -47,8 +46,8 @@ class FizzBuzz
     private function validate(array $replacedArray): void
     {
         if (
-            in_array("Fizz", $replacedArray, true) == false &&
-            in_array("Buzz", $replacedArray, true) == false
+            false === \in_array('Fizz', $replacedArray, true) &&
+            false === \in_array('Buzz', $replacedArray, true)
         ) {
             throw new Exception('Not Found');
         }
@@ -56,9 +55,10 @@ class FizzBuzz
 
     private function createArrayWithDefinedValue(): array
     {
-        for ($i = 1; $i <= $this->arrayLimit; $i++) {
+        for ($i = 1; $i <= $this->arrayLimit; ++$i) {
             $array[] = $i;
         }
+
         return $array;
     }
 }

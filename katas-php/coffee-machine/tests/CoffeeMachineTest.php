@@ -2,14 +2,17 @@
 
 namespace CoffeeMachine\Tests;
 
-use CoffeeMachine\CoffeeMachine;
 use PHPUnit\Framework\TestCase;
+use CoffeeMachine\CoffeeMachine;
 
+/**
+ * @coversNothing
+ */
 class CoffeeMachineTest extends TestCase
 {
-    /** @test */
-    public function xxx() {
+    public function testXxx()
+    {
         new CoffeeMachine();
-        $this->assertEquals(true, true);
+        $this->assertTrue(true);
     }
 }

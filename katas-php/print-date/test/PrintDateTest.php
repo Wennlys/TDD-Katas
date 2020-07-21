@@ -2,13 +2,13 @@
 
 namespace PrintDate\Test;
 
-use PHPUnit\Framework\TestCase;
 use PrintDate\PrintDate;
+use PHPUnit\Framework\TestCase;
 
 class PrintDateTest extends TestCase
 {
     /** @test */
-    public function it_test_system_methods()
+    public function itTestSystemMethods()
     {
         $printDate = new PrintDate();
 

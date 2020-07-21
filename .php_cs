@@ -1,17 +1,20 @@
 <?php
 
-$config = new PhpCsFixer\Config();
+//https://mlocati.github.io/ docs
 
-    // $config->registerCustomFixers([
-    //     new SlamCsFixer\FinalInternalClassFixer(),
-    // ]);
+$config = new PhpCsFixer\Config();
 
     $config->setRules([
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
         'php_unit_internal_class' => false,
-        'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+        'php_unit_test_case_static_method_calls' => ['call_type' => 'this'],
+        'php_unit_test_class_requires_covers' => false,
+        'php_unit_namespaced' => ['target' => 'newest'],
+        'php_unit_test_annotation' => false,
         'ordered_imports' => ['sort_algorithm' => 'length', 'imports_order' => ['class', 'const', 'function']],
+        'concat_space' => ['spacing' => 'one'],
+        'self_accessor' => false,
         // 'array_indentation' => true,
         // 'array_syntax' => ['syntax' => 'short'],
         // 'combine_consecutive_unsets' => true,

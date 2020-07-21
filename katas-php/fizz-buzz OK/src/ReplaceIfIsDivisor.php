@@ -6,19 +6,21 @@ class ReplaceIfIsDivisor implements Replacer
 {
     public function replace(int $number): ?string
     {
-        if ($number == 0) {
+        if (0 === $number) {
             return null;
         }
 
-        $isNumDividedByThree = $number % 3 == 0;
-        $isNumDividedByFive = $number % 5 == 0;
+        $isNumDividedByThree = 0 === $number % 3;
+        $isNumDividedByFive = 0 === $number % 5;
 
         if ($isNumDividedByThree && $isNumDividedByFive) {
-            return "FizzBuzz";
-        } elseif ($isNumDividedByThree) {
-            return "Fizz";
-        } elseif ($isNumDividedByFive) {
-            return "Buzz";
+            return 'FizzBuzz';
+        }
+        if ($isNumDividedByThree) {
+            return 'Fizz';
+        }
+        if ($isNumDividedByFive) {
+            return 'Buzz';
         }
 
         return null;

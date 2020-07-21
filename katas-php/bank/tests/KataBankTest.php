@@ -12,7 +12,7 @@ class KataBankTest extends TestCase
 {
     public function testShouldPrintStatementsContainingAllTransactions()
     {
-        self::markTestIncomplete('Not yet');
+        $this->markTestIncomplete('Not yet');
         $consoleProphecy = $this->prophesize('KataBank\Console');
         $account = new AccountService($consoleProphecy->reveal());
         $account->deposit(1000);
